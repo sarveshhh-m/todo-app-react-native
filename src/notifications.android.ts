@@ -2,13 +2,13 @@ import PushNotification from 'react-native-push-notification';
 
 const handleScheduledNotification = (
   title: string,
-  message: string,
+  // message: string,
   date: Date,
 ) =>
 PushNotification.localNotificationSchedule({
   title:title,
   date:date,
-  message:message,
+  message: `Your reminder for ${title} at ${date.getHours()+":"+date.getMinutes() }`,
   allowWhileIdle:true,
   channelId: "reminders"
 });
