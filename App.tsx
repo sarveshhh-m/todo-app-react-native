@@ -1,18 +1,28 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Tasks from './src/components/Tasks/Tasks';
-import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Reminders from './src/components/Reminders/Reminders';
-import {View} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import PushNotification, {Importance} from 'react-native-push-notification';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-// const Tab = createMaterialBottomTabNavigator();
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Profile from './src/components/Profile/Profile';
 const Tab = createMaterialTopTabNavigator();
+const Stack = createNativeStackNavigator();
+
+const styles = StyleSheet.create({
+  profileIcon:{
+
+  }
+})
+
 const App = () => {
+  const [profileImageExist, ifProfileImageExist] = useState<boolean>(false)
 
   useEffect(() => {
+    // PushNotification.cancelAllLocalNotifications()
     PushNotification.createChannel(
       {
         channelId: 'reminders',
@@ -27,42 +37,54 @@ const App = () => {
     );
   }, []);
 
+
+const TopBarTabs = ({navigation}:any) => {
+
+  return (
+    <SafeAreaProvider>
+      <View style={{flexDirection:"row", justifyContent:"space-between", padding:10, backgroundColor:"#ffa"}}>
+       <TouchableOpacity style={styles.profileIcon} onPress={() => navigation.navigate('profile')}>
+{
+  profileImageExist ?
+   null:   // will add the picture later
+    <FontAwesome name='user-circle' color={"black"} size={30} />
+}
+       </TouchableOpacity>
+        <Text>Hello</Text>
+      </View>
+      <Tab.Navigator screenOptions={{swipeEnabled:true,tabBarLabelStyle:{fontSize:12, height:15}}}>
+        <Tab.Screen
+          name="todo"
+          component={Tasks}
+          options={{
+            tabBarLabel: 'Tasks',
+
+          }}
+
+        />
+        <Tab.Screen
+          name="reminders"
+          component={Reminders}
+          options={{
+            tabBarLabel: 'Reminders',
+          }}
+        />
+      </Tab.Navigator>
+    </SafeAreaProvider>
+  );
+};
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator
-          // shifting={true}
-          // barStyle={{
-          //   width: '100%',
-          //   backgroundColor: 'white',
-          //   height: 70,
-          // }}
-          >
-          <Tab.Screen
-            name="todo"
-            component={Tasks}
-            options={{
-              tabBarLabel: 'Tasks',
-              tabBarIcon: () => (
-                <View>
-                  <Entypo name="list" color={'black'} size={20} />
-                </View>
-              ),
-            }}
+        <Stack.Navigator>
+          <Stack.Screen
+            name="tabs"
+            component={TopBarTabs}
+            options={{headerShown: false}}
           />
-          <Tab.Screen
-            name="reminders"
-            component={Reminders}
-            options={{
-              tabBarLabel: 'Reminders',
-              tabBarIcon: () => (
-                <View>
-                  <Entypo name="stopwatch" color={'black'} size={20} />
-                </View>
-              ),
-            }}
-          />
-        </Tab.Navigator>
+          <Stack.Screen name='profile' component={Profile} />
+        </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
   );
