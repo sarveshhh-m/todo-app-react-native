@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import Tasks from './src/components/Tasks';
+import Tasks from './src/components/Tasks/Tasks';
 import {createMaterialBottomTabNavigator} from 'react-native-paper/react-navigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import Reminders from './src/components/Reminders';
+import Reminders from './src/components/Reminders/Reminders';
 import {View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import PushNotification, {Importance} from 'react-native-push-notification';
-
-const Tab = createMaterialBottomTabNavigator();
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+// const Tab = createMaterialBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 const App = () => {
 
   useEffect(() => {
@@ -30,12 +31,13 @@ const App = () => {
     <SafeAreaProvider>
       <NavigationContainer>
         <Tab.Navigator
-          shifting={true}
-          barStyle={{
-            width: '100%',
-            backgroundColor: 'white',
-            height: 70,
-          }}>
+          // shifting={true}
+          // barStyle={{
+          //   width: '100%',
+          //   backgroundColor: 'white',
+          //   height: 70,
+          // }}
+          >
           <Tab.Screen
             name="todo"
             component={Tasks}
