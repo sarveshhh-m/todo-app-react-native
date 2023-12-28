@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import CustomInput from '../custom-comp/CustomInput';
+import CustomInput from '../../custom-comp/CustomInput';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   createTable,
@@ -19,7 +19,7 @@ import {
   deleteRecord,
   updateRecord,
   dropTable,
-} from '../db/tasksTX';
+} from '../../db/tasksTX';
 
 const Tasks = () => {
   const [taskName, setTaskName] = useState('');

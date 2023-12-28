@@ -9,16 +9,16 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Modal} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import CustomInput from '../custom-comp/CustomInput';
+import CustomInput from '../../custom-comp/CustomInput';
 import DatePicker from 'react-native-date-picker';
 import {
   createReminderTable,
   getDataFromReminder,
   setDataInReminder,
   deleteRecord,
-} from '../db/remindersTX';
+} from '../../db/remindersTX';
 import Feather from 'react-native-vector-icons/Feather';
-import {handleScheduledNotification} from '../notifications.android';
+import {handleScheduledNotification} from '../../notifications.android';
 import PushNotification from 'react-native-push-notification';
 const Reminders = () => {
   const [reminderModal, setReminderModal] = useState<boolean>(false);
