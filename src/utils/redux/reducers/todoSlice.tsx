@@ -35,8 +35,25 @@ const todoReducer = createSlice({
         todo => todo.id !== action.payload,
       );
     },
+    updateTodo: (state, action) => {
+      const todoToUpdate = state.todoList.find(
+        todo => todo.id === action.payload.id,
+      );
+
+      if (todoToUpdate) {
+        todoToUpdate.title = action.payload.title || todoToUpdate.title;
+        todoToUpdate.description =
+          action.payload.description || todoToUpdate.description;
+        todoToUpdate.timestamp =
+          action.payload.timestamp || todoToUpdate.timestamp;
+        todoToUpdate.completed =
+          action.payload.completed || todoToUpdate.completed;
+        todoToUpdate.notification =
+          action.payload.notification || todoToUpdate.notification;
+      }
+    },
   },
 });
 
-export const {addTodo, removeTodo} = todoReducer.actions;
+export const {addTodo, removeTodo, updateTodo} = todoReducer.actions;
 export default todoReducer.reducer;

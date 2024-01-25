@@ -10,7 +10,7 @@ export default StyleSheet.create({
     margin: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     backgroundColor: theme.colors.card,
     borderRadius: 10,
     padding: 10,
