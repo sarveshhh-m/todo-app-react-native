@@ -1,3 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-shadow */
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -32,7 +36,9 @@ const Reminders = () => {
 
   useEffect(() => {
     createReminderTable();
-    PushNotification.getScheduledLocalNotifications((notiff)=> console.log(notiff))
+    PushNotification.getScheduledLocalNotifications(notiff =>
+      console.log(notiff),
+    );
   }, []);
 
   useEffect(() => {
@@ -74,8 +80,9 @@ const Reminders = () => {
               </Text>
             </View>
             <TouchableOpacity
-              onPress={() => {deleteRecord(element.id)
-              // PushNotification.cancelLocalNotification()
+              onPress={() => {
+                deleteRecord(element.id);
+                // PushNotification.cancelLocalNotification()
               }}
               style={styles.deleteBtn}>
               <AntDesign name="delete" color={'rgba(255,0,0,0.5)'} size={25} />
@@ -94,31 +101,34 @@ const Reminders = () => {
                     style={styles.addBtnText}
                     onPress={() => {
                       addReminder();
-                      setName("")
-                      setSelectedTime(0)
+                      setName('');
+                      setSelectedTime(0);
                     }}>
                     Done
                   </Text>
                 ) : (
                   <Text
-                    onPress={() =>
-                      {
-                        setReminderModal(false)
-                      setName("")
-                      setSelectedTime(0)
-                      }
-                      }
+                    onPress={() => {
+                      setReminderModal(false);
+                      setName('');
+                      setSelectedTime(0);
+                    }}
                     style={{color: '#888888'}}>
                     close
                   </Text>
                 )}
               </TouchableOpacity>
             </View>
-          <View style={{backgroundColor:"#ddd",height:3, width:"100%", alignSelf:"center", marginTop:20}}>
+            <View
+              style={{
+                backgroundColor: '#ddd',
+                height: 3,
+                width: '100%',
+                alignSelf: 'center',
+                marginTop: 20,
+              }}></View>
 
-          </View>
-
-            <View style={{marginVertical: 50,padding:5}}>
+            <View style={{marginVertical: 50, padding: 5}}>
               <Text style={styles.modalLabel}>
                 Title<Text style={{color: 'red'}}>*</Text>
               </Text>
@@ -134,11 +144,11 @@ const Reminders = () => {
                   flexDirection: 'row-reverse',
                   justifyContent: 'center',
                   borderWidth: 1,
-                  padding:10,
-                backgroundColor:"#efe",
-                marginVertical:10,
-                borderRadius:5,
-                width:"50%"
+                  padding: 10,
+                  backgroundColor: '#efe',
+                  marginVertical: 10,
+                  borderRadius: 5,
+                  width: '50%',
                 }}
                 onPress={() => setTimeModal(true)}>
                 <Feather color={'orange'} size={25} name="clock" />
@@ -148,9 +158,7 @@ const Reminders = () => {
                   <Text style={styles.setTimingText}>Set time</Text>
                 )}
               </TouchableOpacity>
-            <Text>
-               {selectedTime !== 0 && <Text>{}</Text>}
-              </Text>
+              <Text>{selectedTime !== 0 && <Text>{}</Text>}</Text>
               <DatePicker
                 modal={true}
                 open={timeModal}
